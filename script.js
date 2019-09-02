@@ -17,68 +17,72 @@ let appData = {
   optionalExpenses: {},
   income: [],
   timeData: time,
-  savings: false
+  savings: true,
+  chooseExpenses: function () {
+    for (let i = 0; i < 2; i++) {
+
+      let a = prompt("Введите обязательную статью расходов в этом месяце", ''),
+        b = prompt("Во сколько обойдется?", '');
+
+      if ((typeof (a)) === 'string' && (typeof (a)) != null && (typeof (b)) != null &&
+        a != '' && b != '' && a.length < 50) {
+
+        appData.expenses[a] = b;
+
+      } else {
+        alert('Bad result');
+        i--;
+      }
+    }
+  },
+  detectDayBudget: function () {
+    appData.moneyPerDay = (appData.budget / 30).toFixed();
+    alert('Ежедневный бюджет:' + appData.moneyPerDay);
+  },
+  detectLevel: function () {
+    if (appData.moneyPerDay < 100) {
+      console.log("Это минимальный уровень достатка!");
+    } else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
+      console.log("Это средний уровень достатка!");
+    } else if (appData.moneyPerDay > 2000) {
+      console.log("Это высокий уровень достатка!");
+    } else {
+      console.log("Произошла ошибка");
+    }
+  },
+  chooseOptExpenses: function () {
+    for (i = 1; i < 4; i++) {
+      let opt = prompt("Статья необязательных расходов", '');
+      if ((typeof (opt)) === 'string' && (typeof (opt)) != null &&
+        opt != '' && opt.length < 50) {
+        appData.optionalExpenses[i] = opt;
+        console.log(appData.optionalExpenses);
+
+      } else {
+        alert('Bad result');
+        i--;
+      }
+    }
+  },
+  checkSavings: function () {
+    if (appData.savings == true) {
+      let save = +prompt("Какова сумма накоплений?" , ''),
+        percent = +prompt("Под какой процент?" , '');
+
+      appData.monthIncome = save / 100 / 12 * percent;
+      alert("Доход с Вашего депозита в месяц: " + appData.monthIncome);
+    }
+  },
+  chooseIncome: function () {
+    let inc = prompt('Что принесет дополнительный доход? (Перечислите через запятую)' , '');
+      if ((typeof (inc)) === 'string' && (typeof (inc)) != null &&
+        inc != '' && inc.length < 50){
+          appData.income[i] = inc;
+          appData.income = inc.split( ', ');
+          appData.income.push( prompt( 'Может что-то ещё?'));
+          appData.income.sort();
+        }
+  }
+
 };
-
-function chooseExpenses() {
-  for (let i = 0; i < 2; i++) {
-
-    let a = prompt("Введите обязательную статью расходов в этом месяце", ''),
-      b = prompt("Во сколько обойдется?", '');
-
-    if ((typeof (a)) === 'string' && (typeof (a)) != null && (typeof (b)) != null &&
-      a != '' && b != '' && a.length < 50) {
-
-      appData.expenses[a] = b;
-
-    } else {
-      alert('Bad result');
-      i--;
-    }
-  }
-}
-chooseExpenses();
-
-function detectDayBudget() {
-  appData.moneyPerDay = (appData.budget / 30).toFixed();
-  alert('Ежедневный бюджет:' + appData.moneyPerDay);
-}
-detectDayBudget();
-
-function detectLevel() {
-  if (appData.moneyPerDay < 100) {
-    console.log("Это минимальный уровень достатка!");
-  } else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
-    console.log("Это средний уровень достатка!");
-  } else if (appData.moneyPerDay > 2000) {
-    console.log("Это высокий уровень достатка!");
-  } else {
-    console.log("Произошла ошибка");
-  }
-}
-detectLevel();
-function chooseOptExpenses() {
-  for (i = 1; i < 4; i++) {
-    let a = prompt("Статья необязательных расходов", '');
-    if ((typeof (a)) === 'string' && (typeof (a)) != null &&
-      a != '' && a.length < 50) {
-      appData.optionalExpenses[i] = a;
-      console.log(appData.optionalExpenses);
-      
-    } else {
-      alert('Bad result');
-      i--;
-    }
-  }
-}
-chooseOptExpenses();
-function checkSavings() {
-  if (appData.savings == true) {
-      let save = +prompt("Какова сумма накоплений?"),
-          percent = +prompt("Под какой процент?");
-
-          appData.monthIncome = save/100/12*percent;
-          alert("Доход с Вашего депозита в месяц: " + appData.monthIncome);
-  }
-}
-checkSavings();
+appData.chooseIncome()
