@@ -66,23 +66,26 @@ let appData = {
   },
   checkSavings: function () {
     if (appData.savings == true) {
-      let save = +prompt("Какова сумма накоплений?" , ''),
-        percent = +prompt("Под какой процент?" , '');
+      let save = +prompt("Какова сумма накоплений?", ''),
+        percent = +prompt("Под какой процент?", '');
 
       appData.monthIncome = save / 100 / 12 * percent;
       alert("Доход с Вашего депозита в месяц: " + appData.monthIncome);
     }
   },
   chooseIncome: function () {
-    let inc = prompt('Что принесет дополнительный доход? (Перечислите через запятую)' , '');
-      if ((typeof (inc)) === 'string' && (typeof (inc)) != null &&
-        inc != '' && inc.length < 50){
-          appData.income[i] = inc;
-          appData.income = inc.split( ', ');
+    let inc = prompt('Что принесет дополнительный доход? (Перечислите через запятую)');
+    if ((typeof (inc)) != 'string' || (typeof (inc)) == null ||
+    inc == ''){
+        alert('Вы внесли не коректные данные, или вообще ничего не внесли');
+        
+    } else {
+          appData.income = inc.split(", " );
           appData.income.push( prompt( 'Может что-то ещё?'));
           appData.income.sort();
-        }
+        
+    }
+      
+    
   }
-
 };
-appData.chooseIncome()
