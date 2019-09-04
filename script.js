@@ -74,7 +74,7 @@ let appData = {
     }
   },
   chooseIncome: function () {
-    let inc = prompt('Что принесет дополнительный доход? (Перечислите через запятую)');
+    let inc = prompt('Что принесет дополнительный доход? (Перечислите через запятую)', '');
     if ((typeof (inc)) != 'string' || (typeof (inc)) == null ||
     inc == ''){
         alert('Вы внесли не коректные данные, или вообще ничего не внесли');
@@ -85,7 +85,15 @@ let appData = {
           appData.income.sort();
         
     }
-      
-    
+    appData.income.forEach (function (itemmassive, i) {
+      alert("Способы доп. заработка: " + (i+1) + " - " + itemmassive);
+  });
+       
   }
 };
+for (let key in appData) {
+  console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
+};
+
+
+alert( +"Infinity" );
